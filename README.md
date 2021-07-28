@@ -13,6 +13,27 @@
 npm install holidate
 ```
 
+## Usage
+```js
+const holidate = require('holidate');
+
+// defaults to en_US culture
+// i.e. USA Holidays with names displayed in English
+let holidays = holidate.getAllHolidays(2021);
+
+// or you can provide a culture.
+// This will return USA Holidays with names displayed in Spanish.
+let spanishHolidays = holidate.getAllHolidays(2021, 'es_US');
+
+// to check if a date is a holiday
+let christmas = new Date(2021, 11, 25);
+let chirstmasIsHoliday = holidate.isHoliday(christmas);
+
+// you can control which country's holiday list is checked
+// by passing the culture as the second parameter
+let chirstmasIsHolidayInUSA = holidate.isHoliday(christmas, 'en_US');
+```
+
 ## Author
 
 👤 **zachnology**

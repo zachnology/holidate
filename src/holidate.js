@@ -18,9 +18,10 @@ function getHolidays(year, culture) {
 function isHoliday(date, culture) {
     culture = culture || defaultCulture;
     let holidayService = cultureMap[culture];
-
-    let holidays =  holidayService.getHolidayList(date.getFullYear(), culture);
-    return holidays.some(h => h.date.getTime() == date.getTime());
+    
+    let timelessDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    let holidays =  holidayService.getHolidayList(timelessDate.getFullYear(), culture);
+    return holidays.some(h => h.date.getTime() == timelessDate.getTime());
 }
 
 module.exports = { getAllHolidays: getHolidays, isHoliday };
