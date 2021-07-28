@@ -30,7 +30,7 @@ let rules = [
         en_US: "New Year's Day",
         es_US: "Año Nuevo",
         isFixedDate: true,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.january,
         day: 1
     },
@@ -38,7 +38,7 @@ let rules = [
         en_US: 'Martin Luther King Jr. Day',
         es_US: "Día de Martin Luther King Jr.",
         isFixedDate: false,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.february,
         dayOfWeek: daysOfWeek.monday,
         weekNumber: 3
@@ -47,7 +47,7 @@ let rules = [
         en_US: "Washington's Birthday",
         es_US: "Cumpleaños de Washington",
         isFixedDate: false,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.february,
         dayOfWeek: daysOfWeek.monday,
         weekNumber: 3
@@ -56,7 +56,7 @@ let rules = [
         en_US: 'Memorial Day',
         es_US: 'Día Conmemorativo',
         isFixedDate: false,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.may,
         dayOfWeek: daysOfWeek.monday,
         weekNumber: 5
@@ -65,7 +65,7 @@ let rules = [
         en_US: 'Juneteenth National Independence Day',
         es_US: 'Juneteenth Día de Independencia Nacional',
         isFixedDate: true,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.june,
         day: 19
     },
@@ -73,7 +73,7 @@ let rules = [
         en_US: 'Independence Day',
         es_US: 'Día de la Independencia',
         isFixedDate: true,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.july,
         day: 4
     },
@@ -81,7 +81,7 @@ let rules = [
         en_US: 'Labor Day',
         es_US: 'Día Laboral',
         isFixedDate: false,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.september,
         dayOfWeek: daysOfWeek.monday,
         weekNumber: 1
@@ -90,7 +90,7 @@ let rules = [
         en_US: 'Columbus Day',
         es_US: 'Día de la Raza',
         isFixedDate: false,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.october,
         dayOfWeek: daysOfWeek.monday,
         weekNumber: 2
@@ -99,7 +99,7 @@ let rules = [
         en_US: 'Veterans Day',
         es_US: 'Día de los Veteranos',
         isFixedDate: true,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.november,
         day: 11
     },
@@ -107,7 +107,7 @@ let rules = [
         en_US: 'Thanksgiving Day',
         es_US: 'Día de Gracias',
         isFixedDate: false,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.november,
         dayOfWeek: daysOfWeek.thursday,
         weekNumber: 4
@@ -116,7 +116,7 @@ let rules = [
         en_US: 'Christmas Day',
         es_US: 'Navidad',
         isFixedDate: true,
-        isFederalHoliday: true,
+        type: 'federal',
         month: months.december,
         day: 25
     }
@@ -125,7 +125,7 @@ let rules = [
 function getHolidayList(year, culture) {
     let holidays = rules.map(r => ({
             name: r[culture],
-            isFederalHoliday: r.isFederalHoliday,
+            type: r.type,
             date: r.isFixedDate ? new Date(year, r.month, r.day) : getNthDayOfNthWeek(new Date(year, r.month, 1), r.dayOfWeek, r.weekNumber)
         })
     );
@@ -135,7 +135,7 @@ function getHolidayList(year, culture) {
         .filter(h => weekendDays.includes(h.date.getDay()))
         .map(h => ({
                 name: `${h.name} (${getObservedText(culture)})`,
-                isFederalHoliday: h.isFederalHoliday,
+                type: h.type,
                 date: addDays(h.date, h.date.getDay() == daysOfWeek.saturday ? -1 : 1)
             })
         );
