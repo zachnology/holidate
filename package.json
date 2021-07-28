@@ -1,0 +1,25 @@
+{
+  "name": "holidate",
+  "version": "1.0.0",
+  "description": "JS library for holidays",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zachnology/holidate.git"
+  },
+  "keywords": [
+    "holiday"
+  ],
+  "author": "zachnology",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zachnology/holidate/issues"
+  },
+  "homepage": "https://github.com/zachnology/holidate#readme",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}
