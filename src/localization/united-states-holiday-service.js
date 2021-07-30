@@ -39,7 +39,7 @@ let rules = [
         es_US: "Día de Martin Luther King Jr.",
         isFixedDate: false,
         type: 'federal',
-        month: months.february,
+        month: months.january,
         dayOfWeek: daysOfWeek.monday,
         weekNumber: 3
     },
