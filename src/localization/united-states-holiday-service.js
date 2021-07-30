@@ -1,29 +1,4 @@
-let daysOfWeek = {
-    sunday: 0,
-    monday: 1,
-    tuesday: 2,
-    wednesday: 3,
-    thursday: 4,
-    friday: 5,
-    saturday: 6
-};
-
-let months = {
-    january: 0,
-    february: 1,
-    march: 2,
-    april: 3,
-    may: 4,
-    june: 5,
-    july: 6,
-    august: 7,
-    september: 8,
-    october: 9,
-    november: 10,
-    december: 11,
-}
-
-let weekendDays = [ daysOfWeek.saturday, daysOfWeek.sunday ];
+const util = require('../util');
 
 let rules = [
     {
@@ -31,7 +6,7 @@ let rules = [
         es_US: "Año Nuevo",
         isFixedDate: true,
         type: 'federal',
-        month: months.january,
+        month: util.months.january,
         day: 1
     },
     {
@@ -39,8 +14,8 @@ let rules = [
         es_US: "Día de Martin Luther King Jr.",
         isFixedDate: false,
         type: 'federal',
-        month: months.january,
-        dayOfWeek: daysOfWeek.monday,
+        month: util.months.january,
+        dayOfWeek: util.daysOfWeek.monday,
         weekNumber: 3
     },
     {
@@ -48,8 +23,8 @@ let rules = [
         es_US: "Cumpleaños de Washington",
         isFixedDate: false,
         type: 'federal',
-        month: months.february,
-        dayOfWeek: daysOfWeek.monday,
+        month: util.months.february,
+        dayOfWeek: util.daysOfWeek.monday,
         weekNumber: 3
     },
     {
@@ -57,8 +32,8 @@ let rules = [
         es_US: 'Día Conmemorativo',
         isFixedDate: false,
         type: 'federal',
-        month: months.may,
-        dayOfWeek: daysOfWeek.monday,
+        month: util.months.may,
+        dayOfWeek: util.daysOfWeek.monday,
         weekNumber: 5
     },
     {
@@ -66,7 +41,7 @@ let rules = [
         es_US: 'Juneteenth Día de Independencia Nacional',
         isFixedDate: true,
         type: 'federal',
-        month: months.june,
+        month: util.months.june,
         day: 19
     },
     {
@@ -74,7 +49,7 @@ let rules = [
         es_US: 'Día de la Independencia',
         isFixedDate: true,
         type: 'federal',
-        month: months.july,
+        month: util.months.july,
         day: 4
     },
     {
@@ -82,8 +57,8 @@ let rules = [
         es_US: 'Día Laboral',
         isFixedDate: false,
         type: 'federal',
-        month: months.september,
-        dayOfWeek: daysOfWeek.monday,
+        month: util.months.september,
+        dayOfWeek: util.daysOfWeek.monday,
         weekNumber: 1
     },
     {
@@ -91,8 +66,8 @@ let rules = [
         es_US: 'Día de la Raza',
         isFixedDate: false,
         type: 'federal',
-        month: months.october,
-        dayOfWeek: daysOfWeek.monday,
+        month: util.months.october,
+        dayOfWeek: util.daysOfWeek.monday,
         weekNumber: 2
     },
     {
@@ -100,7 +75,7 @@ let rules = [
         es_US: 'Día de los Veteranos',
         isFixedDate: true,
         type: 'federal',
-        month: months.november,
+        month: util.months.november,
         day: 11
     },
     {
@@ -108,8 +83,8 @@ let rules = [
         es_US: 'Día de Gracias',
         isFixedDate: false,
         type: 'federal',
-        month: months.november,
-        dayOfWeek: daysOfWeek.thursday,
+        month: util.months.november,
+        dayOfWeek: util.daysOfWeek.thursday,
         weekNumber: 4
     },
     {
@@ -117,7 +92,7 @@ let rules = [
         es_US: 'Navidad',
         isFixedDate: true,
         type: 'federal',
-        month: months.december,
+        month: util.months.december,
         day: 25
     }
 ];
@@ -132,11 +107,11 @@ function getHolidayList(year, culture) {
 
 
     let holidaysObservedOnAnotherDay = holidays
-        .filter(h => weekendDays.includes(h.date.getDay()))
+        .filter(h => util.weekendDays.includes(h.date.getDay()))
         .map(h => ({
                 name: `${h.name} (${getObservedText(culture)})`,
                 type: h.type,
-                date: addDays(h.date, h.date.getDay() == daysOfWeek.saturday ? -1 : 1)
+                date: addDays(h.date, h.date.getDay() == util.daysOfWeek.saturday ? -1 : 1)
             })
         );
 
