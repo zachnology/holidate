@@ -20,6 +20,26 @@ const holidate = require('holidate');
 // Get 2021 holidays in US with holiday names in English
 let holidays = holidate.getHolidays(2021);
 
+// returns:
+// [
+//   {
+//     name: "New Year's Day",
+//     type: 'federal',
+//     date: 2021-01-01T07:00:00.000Z
+//   },
+//   {
+//     name: 'Martin Luther King Jr. Day',
+//     type: 'federal',
+//     date: 2021-01-18T07:00:00.000Z
+//   },
+//   {
+//     name: "Washington's Birthday",
+//     type: 'federal',
+//     date: 2021-02-15T07:00:00.000Z
+//   },
+//   // ...
+// ]
+
 // Get 2021 holidays in Mexico with holiday names in the default language
 let mexicoHolidays = holidate.getHolidays(2021, 'MX');
 
