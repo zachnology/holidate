@@ -18,13 +18,13 @@ npm install holidate
 const holidate = require('holidate');
 
 // Get 2021 holidays in US with holiday names in English
-let holidays = holidate.getAllHolidays(2021);
+let holidays = holidate.getHolidays(2021);
 
 // Get 2021 holidays in Mexico with holiday names in the default language
-let mexicoHolidays = holidate.getAllHolidays(2021, 'MX');
+let mexicoHolidays = holidate.getHolidays(2021, 'MX');
 
 // Get 2021 holidays in Canada with holiday names in French
-let canadaHolidays = holidate.getAllHolidays(2021, 'CA', 'fr');
+let canadaHolidays = holidate.getHolidays(2021, 'CA', 'fr');
 
 // Check if a date is a holiday
 let chirstmasIsHoliday = holidate.isHoliday(new Date(2021, 11, 25));

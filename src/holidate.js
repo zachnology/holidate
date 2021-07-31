@@ -20,4 +20,4 @@ function isHoliday(date, country) {
     return holidays.some(h => h.date.getTime() == timelessDate.getTime());
 }
 
-module.exports = { getAllHolidays: getHolidays, isHoliday };
+module.exports = { getHolidays: getHolidays, isHoliday };
