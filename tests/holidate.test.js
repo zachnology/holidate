@@ -6,6 +6,6 @@ test('Christmas 2021 is holiday', () => {
 });
 
 test('es language working', () => {
-    let holidays = holidate.getAllHolidays(2021, 'US', 'es');
+    let holidays = holidate.getAllHolidays(2021, 'us', 'es');
     expect(holidays.some(h => h.name.includes('Navidad'))).toBe(true);
 });

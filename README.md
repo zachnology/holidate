@@ -17,22 +17,25 @@ npm install holidate
 ```js
 const holidate = require('holidate');
 
-// defaults to en_US culture
-// i.e. USA Holidays with names displayed in English
+// Get 2021 holidays in US with holiday names in English
 let holidays = holidate.getAllHolidays(2021);
 
-// or you can provide a culture.
-// This will return USA Holidays with names displayed in Spanish.
-let spanishHolidays = holidate.getAllHolidays(2021, 'es_US');
+// Get 2021 holidays in Mexico with holiday names in the default language
+let mexicoHolidays = holidate.getAllHolidays(2021, 'MX');
 
-// to check if a date is a holiday
-let christmas = new Date(2021, 11, 25);
-let chirstmasIsHoliday = holidate.isHoliday(christmas);
+// Get 2021 holidays in Canada with holiday names in French
+let canadaHolidays = holidate.getAllHolidays(2021, 'CA', 'fr');
 
-// you can control which country's holiday list is checked
-// by passing the culture as the second parameter
-let chirstmasIsHolidayInUSA = holidate.isHoliday(christmas, 'en_US');
+// Check if a date is a holiday
+let chirstmasIsHoliday = holidate.isHoliday(new Date(2021, 11, 25));
+
+// Check if date is a holiday in a given country
+let chirstmasIsHolidayInGreatBritain = holidate.isHoliday(new Date(2021, 11, 25), 'GB');
 ```
+
+Country codes follow the [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) alpha-2 standard.
+
+Language codes follow the [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) standard
 
 ## Author
 
