@@ -1,7 +1,6 @@
 # Contributing
 
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. 
+When contributing to this repository, please first discuss the change you wish to make via issue or email before making a change. 
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
@@ -90,3 +89,38 @@ available at [http://contributor-covenant.org/version/1/4][version]
 
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
+
+## Getting Started
+
+### Vision
+The vision for the project is to create a library that can calculate holidays for any country with holiday names in appropriate languages. Holidays should not be hardcoded. Instead the logic should be able to calculate the holiday date for any year future or past.
+
+### Current State
+Currently, only US federal holidays in English and Spanish are implemented.
+
+### Task List
+- [x] Add support for US federal holidays in English and Spanish
+- [ ] Add support for non-federal US holidays
+- [ ] Add support for your country and language
+- [ ] Add support entities other than countries (group that are either a subset of a country OR groups that transcend country boarders)
+
+### Structure
+The main interface is in `src/holidate.js`. The main function `holidate.getHolidays(...)` returns an array of objects with with the following properties: name (string), type (string), and date (date). The type is used as a discriminator for convenient filtering. 
+
+Each country's holiday logic should be contained in its own service in the `localization/` directory. The naming scheme of these services should be in the format `{ISO_country_code}.service.js`. Service classes should expose a method called `getHolidayList` that accepts parameters `year` and `language`.
+
+Logic inside `/src/holidate.js` should provide mapping to the appropriate service based on country code.
+
+Tests for each country reside in the `tests/` directory using the naming scheme `{ISO_country_code}.service.test.js`. Jest is used as the testing framework. Tests can be run with `npm run test`.
+
+Helper collections and functions are stored in `src/util.js`.
+### Contribution for a New Country
+1. Create a new service class in the `localization/` directory using the name format `{ISO_country_code}.service.js`. Remember to add logic for multiple languages if applicable.
+   
+2. Add a test file in the `tests/` directory to test your code. The file name should be of format `{ISO_country_code}.service.test.js`. Include tests to verify correct holiday creation for the current year and at least one past and one future year.
+
+
+3. Update `src/holidate.js` with the country code mapping for your new service.
+
+### Can I make contributions other than adding a new country?
+Yes! There will always be a need for supporting additional languages for the existing countries. You can also add support for additional holidays for an existing country.
