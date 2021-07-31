@@ -1,4 +1,5 @@
 tests/
 .vscode/
+.github/
 CONTRIBUTING.md
 *.tgz
