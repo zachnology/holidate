@@ -1,5 +1,5 @@
 # Welcome to holidate 📅
-![Version](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-0.0.3-blue.svg?cacheSeconds=2592000)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/zachnology/holidate/graphs/commit-activity)
 [![License: MIT](https://img.shields.io/github/license/zachnology/holidate)](https://github.com/zachnology/holidate/blob/master/LICENSE)
 
