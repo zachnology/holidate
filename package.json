@@ -1,5 +1,5 @@
 {
-  "name": "@zachnology/holidate",
+  "name": "holidate",
   "version": "0.0.2-alpha",
   "description": "JS library for holidays",
   "main": "src/holidate.js",
