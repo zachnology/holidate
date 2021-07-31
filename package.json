@@ -2,7 +2,7 @@
   "name": "holidate",
   "version": "0.0.1",
   "description": "JS library for holidays",
-  "main": "index.js",
+  "main": "src/holidate.js",
   "scripts": {
     "test": "jest"
   },
