@@ -1,0 +1,4 @@
+tests/
+.vscode/
+CONTRIBUTING.md
+*.tgz
