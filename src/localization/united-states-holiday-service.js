@@ -2,16 +2,16 @@ const util = require('../util');
 
 let rules = [
     {
-        en_US: "New Year's Day",
-        es_US: "Año Nuevo",
+        en: "New Year's Day",
+        es: "Año Nuevo",
         isFixedDate: true,
         type: 'federal',
         month: util.months.january,
         day: 1
     },
     {
-        en_US: 'Martin Luther King Jr. Day',
-        es_US: "Día de Martin Luther King Jr.",
+        en: 'Martin Luther King Jr. Day',
+        es: "Día de Martin Luther King Jr.",
         isFixedDate: false,
         type: 'federal',
         month: util.months.january,
@@ -19,8 +19,8 @@ let rules = [
         weekNumber: 3
     },
     {
-        en_US: "Washington's Birthday",
-        es_US: "Cumpleaños de Washington",
+        en: "Washington's Birthday",
+        es: "Cumpleaños de Washington",
         isFixedDate: false,
         type: 'federal',
         month: util.months.february,
@@ -28,8 +28,8 @@ let rules = [
         weekNumber: 3
     },
     {
-        en_US: 'Memorial Day',
-        es_US: 'Día Conmemorativo',
+        en: 'Memorial Day',
+        es: 'Día Conmemorativo',
         isFixedDate: false,
         type: 'federal',
         month: util.months.may,
@@ -37,24 +37,24 @@ let rules = [
         weekNumber: 5
     },
     {
-        en_US: 'Juneteenth National Independence Day',
-        es_US: 'Juneteenth Día de Independencia Nacional',
+        en: 'Juneteenth National Independence Day',
+        es: 'Juneteenth Día de Independencia Nacional',
         isFixedDate: true,
         type: 'federal',
         month: util.months.june,
         day: 19
     },
     {
-        en_US: 'Independence Day',
-        es_US: 'Día de la Independencia',
+        en: 'Independence Day',
+        es: 'Día de la Independencia',
         isFixedDate: true,
         type: 'federal',
         month: util.months.july,
         day: 4
     },
     {
-        en_US: 'Labor Day',
-        es_US: 'Día Laboral',
+        en: 'Labor Day',
+        es: 'Día Laboral',
         isFixedDate: false,
         type: 'federal',
         month: util.months.september,
@@ -62,8 +62,8 @@ let rules = [
         weekNumber: 1
     },
     {
-        en_US: 'Columbus Day',
-        es_US: 'Día de la Raza',
+        en: 'Columbus Day',
+        es: 'Día de la Raza',
         isFixedDate: false,
         type: 'federal',
         month: util.months.october,
@@ -71,16 +71,16 @@ let rules = [
         weekNumber: 2
     },
     {
-        en_US: 'Veterans Day',
-        es_US: 'Día de los Veteranos',
+        en: 'Veterans Day',
+        es: 'Día de los Veteranos',
         isFixedDate: true,
         type: 'federal',
         month: util.months.november,
         day: 11
     },
     {
-        en_US: 'Thanksgiving Day',
-        es_US: 'Día de Gracias',
+        en: 'Thanksgiving Day',
+        es: 'Día de Gracias',
         isFixedDate: false,
         type: 'federal',
         month: util.months.november,
@@ -88,8 +88,8 @@ let rules = [
         weekNumber: 4
     },
     {
-        en_US: 'Christmas Day',
-        es_US: 'Navidad',
+        en: 'Christmas Day',
+        es: 'Navidad',
         isFixedDate: true,
         type: 'federal',
         month: util.months.december,
@@ -97,9 +97,9 @@ let rules = [
     }
 ];
 
-function getHolidayList(year, culture) {
+function getHolidayList(year, language) {
     let holidays = rules.map(r => ({
-            name: r[culture],
+            name: r[language],
             type: r.type,
             date: r.isFixedDate ? new Date(year, r.month, r.day) : getNthDayOfNthWeek(new Date(year, r.month, 1), r.dayOfWeek, r.weekNumber)
         })
@@ -109,7 +109,7 @@ function getHolidayList(year, culture) {
     let holidaysObservedOnAnotherDay = holidays
         .filter(h => util.weekendDays.includes(h.date.getDay()))
         .map(h => ({
-                name: `${h.name} (${getObservedText(culture)})`,
+                name: `${h.name} (${getObservedText(language)})`,
                 type: h.type,
                 date: addDays(h.date, h.date.getDay() == util.daysOfWeek.saturday ? -1 : 1)
             })
@@ -138,8 +138,8 @@ function addMonths(date, months) {
     return result;
 }
 
-function getObservedText(culture) {
-    return culture.includes('es') ? 'observado' : 'observed';
+function getObservedText(language) {
+    return language.includes('es') ? 'observado' : 'observed';
 }
 
 module.exports.getHolidayList = getHolidayList;

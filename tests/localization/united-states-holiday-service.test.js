@@ -170,19 +170,19 @@ let controlSet2022 = [
 ];
 
 test ('2020 Dates are correct', () => {
-    let holidayList = unitedStatesHolidayService.getHolidayList(2020, 'en_US');
+    let holidayList = unitedStatesHolidayService.getHolidayList(2020, 'en');
     let allThere = controlSet2020.every(c => holidayList.some(h => h.date.getTime() == c.date.getTime() && h.name == c.name));
     expect(allThere).toBe(true);
 });
 
 test ('2021 Dates are correct', () => {
-    let holidayList = unitedStatesHolidayService.getHolidayList(2021, 'en_US');
+    let holidayList = unitedStatesHolidayService.getHolidayList(2021, 'en');
     let allThere = controlSet2021.every(c => holidayList.some(h => h.date.getTime() == c.date.getTime() && h.name == c.name));
     expect(allThere).toBe(true);
 });
 
 test ('2022 Dates are correct', () => {
-    let holidayList = unitedStatesHolidayService.getHolidayList(2022, 'en_US');
+    let holidayList = unitedStatesHolidayService.getHolidayList(2022, 'en');
     let allThere = controlSet2022.every(c => holidayList.some(h => h.date.getTime() == c.date.getTime() && h.name == c.name));
     expect(allThere).toBe(true);
 });

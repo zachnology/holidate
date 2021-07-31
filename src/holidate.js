@@ -1,26 +1,22 @@
 const unitedStatesHolidayService = require('./localization/united-states-holiday-service');
 
-let defaultCulture = 'en_US';
+let defaultCountry = 'US';
+let defaultLanguage = 'en';
 
-let cultureMap = {
-    en_US: unitedStatesHolidayService,
-    es_US: unitedStatesHolidayService
+let countryMap = {
+    US: unitedStatesHolidayService,
 }
 
-function getHolidays(year, culture) {
-    year = year || new Date().getFullYear();
-    culture = culture || defaultCulture;
-    let holidayService = cultureMap[culture];
-
-    return holidayService.getHolidayList(year, culture);
+function getHolidays(year, country, language) {
+    let holidayService = countryMap[(country || defaultCountry).toUpperCase()];
+    return holidayService.getHolidayList(year || new Date().getFullYear(), (language || defaultLanguage).toLowerCase());
 }
 
-function isHoliday(date, culture) {
-    culture = culture || defaultCulture;
-    let holidayService = cultureMap[culture];
+function isHoliday(date, country) {
+    let holidayService = countryMap[(country || defaultCountry).toUpperCase()];
     
     let timelessDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    let holidays =  holidayService.getHolidayList(timelessDate.getFullYear(), culture);
+    let holidays =  holidayService.getHolidayList(timelessDate.getFullYear(), defaultLanguage);
     return holidays.some(h => h.date.getTime() == timelessDate.getTime());
 }
 
