@@ -98,11 +98,8 @@ The vision for the project is to create a library that can calculate holidays fo
 ### Current State
 Currently, only US federal holidays in English and Spanish are implemented.
 
-### Task List
-- [x] Add support for US federal holidays in English and Spanish
-- [ ] Add support for non-federal US holidays
+### To Do
 - [ ] Add support for your country and language
-- [ ] Add support entities other than countries (group that are either a subset of a country OR groups that transcend country boarders)
 
 ### Structure
 The main interface is in `src/holidate.js`. The main function `holidate.getHolidays(...)` returns an array of objects with with the following properties: name (string), type (string), and date (date). The type is used as a discriminator for convenient filtering. 

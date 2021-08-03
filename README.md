@@ -25,37 +25,37 @@ let holidays = holidate.getHolidays();
 [
     {
         "name": "New Year's Day",
-        "scope": "federal",
+        "tags": [ "federal" ],
         "natural": true,
         "date": "2021-01-01T07:00:00.000Z"
     },
     {
         "name": "Martin Luther King Jr. Day",
-        "scope": "federal",
+        "tags": [ "federal" ],
         "natural": true,
         "date": "2021-01-18T07:00:00.000Z"
     },
     {
         "name": "Washington's Birthday",
-        "scope": "federal",
+        "tags": [ "federal" ],
         "natural": true,
         "date": "2021-02-15T07:00:00.000Z"
     },
     {
         "name": "Memorial Day",
-        "scope": "federal",
+        "tags": [ "federal" ],
         "natural": true,
         "date": "2021-05-31T07:00:00.000Z"
     },
     {
         "name": "Juneteenth National Independence Day (observed)",
-        "scope": "federal",
+        "tags": [ "federal" ],
         "natural": false,
         "date": "2021-06-18T07:00:00.000Z"
     },
     {
         "name": "Juneteenth National Independence Day",
-        "scope": "federal",
+        "tags": [ "federal" ],
         "natural": true,
         "date": "2021-06-19T07:00:00.000Z"
     },
@@ -81,7 +81,7 @@ Array of [holiday](#holiday) objects
 | Field | Type | Description |
 |-------|------|-------------|
 | name | string | Name of the holiday. |
-| scope | string | Scope of the holiday. For example federal, non-federal, etc. Used for filtering out unneeded holidays. |
+| tags | array of strings | Descriptors that can be used to filter the holiday list. For example, Easter in the United States has these tags: `[ 'non-federal', 'religious', 'christianity' ]` |
 | natural | boolean | Whether the holiday object represents the actual holiday date or the date it is being observed in a given year. For example if the holiday falls on a weekend but is observed on a weekday to preserve the work holiday. |
 | date | Date | Date of the holiday.
 

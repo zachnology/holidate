@@ -1,6 +1,6 @@
 {
   "name": "holidate",
-  "version": "0.0.5-alpha",
+  "version": "0.0.6-alpha",
   "description": "JS library for holidays",
   "main": "src/holidate.js",
   "scripts": {

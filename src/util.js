@@ -25,4 +25,24 @@ let months = {
 
 let weekendDays = [ daysOfWeek.saturday, daysOfWeek.sunday ];
 
-module.exports = { daysOfWeek, months, weekendDays };
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}
+
+function addMonths(date, months) {
+    var result = new Date(date);
+    result.setMonth(result.getMonth() + months);
+    return result;
+}
+
+function getNthDayOfNthWeek(date, dayOfWeek, weekNumber) {
+    let firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    let firstDayOfWeekOfMonth = addDays(firstOfMonth, 6 - addDays(firstOfMonth, -1 * (dayOfWeek + 1)).getDay());
+    let result = addDays(firstDayOfWeekOfMonth,(weekNumber - 1) * 7);
+
+    return result >= addMonths(firstOfMonth, 1) ? addDays(result, -7) : result;
+}
+
+module.exports = { daysOfWeek, months, weekendDays, addDays, addMonths, getNthDayOfNthWeek };
