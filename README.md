@@ -17,45 +17,73 @@ npm install holidate
 ```js
 const holidate = require('holidate');
 
-// Get 2021 holidays in US with holiday names in English
-let holidays = holidate.getHolidays(2021);
-
-// returns:
-// [
-//   {
-//     name: "New Year's Day",
-//     type: 'federal',
-//     date: 2021-01-01T07:00:00.000Z
-//   },
-//   {
-//     name: 'Martin Luther King Jr. Day',
-//     type: 'federal',
-//     date: 2021-01-18T07:00:00.000Z
-//   },
-//   {
-//     name: "Washington's Birthday",
-//     type: 'federal',
-//     date: 2021-02-15T07:00:00.000Z
-//   },
-//   // ...
-// ]
-
-// Get 2021 holidays in Mexico with holiday names in the default language
-let mexicoHolidays = holidate.getHolidays(2021, 'MX');
-
-// Get 2021 holidays in Canada with holiday names in French
-let canadaHolidays = holidate.getHolidays(2021, 'CA', 'fr');
-
-// Check if a date is a holiday
-let chirstmasIsHoliday = holidate.isHoliday(new Date(2021, 11, 25));
-
-// Check if date is a holiday in a given country
-let chirstmasIsHolidayInGreatBritain = holidate.isHoliday(new Date(2021, 11, 25), 'GB');
+let holidays = holidate.getHolidays();
 ```
 
-Country codes follow the [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) alpha-2 standard.
+### Example output
+```json
+[
+    {
+        "name": "New Year's Day",
+        "scope": "federal",
+        "natural": true,
+        "date": "2021-01-01T07:00:00.000Z"
+    },
+    {
+        "name": "Martin Luther King Jr. Day",
+        "scope": "federal",
+        "natural": true,
+        "date": "2021-01-18T07:00:00.000Z"
+    },
+    {
+        "name": "Washington's Birthday",
+        "scope": "federal",
+        "natural": true,
+        "date": "2021-02-15T07:00:00.000Z"
+    },
+    {
+        "name": "Memorial Day",
+        "scope": "federal",
+        "natural": true,
+        "date": "2021-05-31T07:00:00.000Z"
+    },
+    {
+        "name": "Juneteenth National Independence Day (observed)",
+        "scope": "federal",
+        "natural": false,
+        "date": "2021-06-18T07:00:00.000Z"
+    },
+    {
+        "name": "Juneteenth National Independence Day",
+        "scope": "federal",
+        "natural": true,
+        "date": "2021-06-19T07:00:00.000Z"
+    },
+    // ...
+]
+```
+## API
 
-Language codes follow the [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) standard
+### getHolidays(year, country, language)
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| year | number | The holidays for this year will be returned. Defaults to the current year. |
+| country | string | The [ISO 3166-1 alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Defaults to 'US'. |
+| language | string | The [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code for the language the holiday names will be returned in. Defaults to 'en'. |
+
+### Response
+
+Array of [holiday](#holiday) objects
+
+### Holiday 
+
+| Field | Type | Description |
+|-------|------|-------------|
+| name | string | Name of the holiday. |
+| scope | string | Scope of the holiday. For example federal, non-federal, etc. Used for filtering out unneeded holidays. |
+| natural | boolean | Whether the holiday object represents the actual holiday date or the date it is being observed in a given year. For example if the holiday falls on a weekend but is observed on a weekday to preserve the work holiday. |
+| date | Date | Date of the holiday.
 
 ## Author
 
