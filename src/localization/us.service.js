@@ -1,5 +1,7 @@
 const util = require('../util');
 
+let defaultLanguage = 'en';
+
 let federalHolidayRules = [
     {
         en: "New Year's Day",
@@ -7,7 +9,8 @@ let federalHolidayRules = [
         isFixedDate: true,
         tags: [ 'federal' ],
         month: util.months.january,
-        day: 1
+        day: 1,
+        peekNextYear: true
     },
     {
         en: 'Martin Luther King Jr. Day',
@@ -16,7 +19,8 @@ let federalHolidayRules = [
         tags: [ 'federal' ],
         month: util.months.january,
         dayOfWeek: util.daysOfWeek.monday,
-        weekNumber: 3
+        weekNumber: 3,
+        peekNextYear: false
     },
     {
         en: "Washington's Birthday",
@@ -25,7 +29,8 @@ let federalHolidayRules = [
         tags: [ 'federal' ],
         month: util.months.february,
         dayOfWeek: util.daysOfWeek.monday,
-        weekNumber: 3
+        weekNumber: 3,
+        peekNextYear: false
     },
     {
         en: 'Memorial Day',
@@ -34,7 +39,8 @@ let federalHolidayRules = [
         tags: [ 'federal' ],
         month: util.months.may,
         dayOfWeek: util.daysOfWeek.monday,
-        weekNumber: 5
+        weekNumber: 5,
+        peekNextYear: false
     },
     {
         en: 'Juneteenth National Independence Day',
@@ -42,7 +48,8 @@ let federalHolidayRules = [
         isFixedDate: true,
         tags: [ 'federal' ],
         month: util.months.june,
-        day: 19
+        day: 19,
+        peekNextYear: false
     },
     {
         en: 'Independence Day',
@@ -50,7 +57,8 @@ let federalHolidayRules = [
         isFixedDate: true,
         tags: [ 'federal' ],
         month: util.months.july,
-        day: 4
+        day: 4,
+        peekNextYear: false
     },
     {
         en: 'Labor Day',
@@ -59,7 +67,8 @@ let federalHolidayRules = [
         tags: [ 'federal' ],
         month: util.months.september,
         dayOfWeek: util.daysOfWeek.monday,
-        weekNumber: 1
+        weekNumber: 1,
+        peekNextYear: false
     },
     {
         en: 'Columbus Day',
@@ -68,7 +77,8 @@ let federalHolidayRules = [
         tags: [ 'federal' ],
         month: util.months.october,
         dayOfWeek: util.daysOfWeek.monday,
-        weekNumber: 2
+        weekNumber: 2,
+        peekNextYear: false
     },
     {
         en: 'Veterans Day',
@@ -76,7 +86,8 @@ let federalHolidayRules = [
         isFixedDate: true,
         tags: [ 'federal' ],
         month: util.months.november,
-        day: 11
+        day: 11,
+        peekNextYear: false
     },
     {
         en: 'Thanksgiving Day',
@@ -85,7 +96,8 @@ let federalHolidayRules = [
         tags: [ 'federal' ],
         month: util.months.november,
         dayOfWeek: util.daysOfWeek.thursday,
-        weekNumber: 4
+        weekNumber: 4,
+        peekNextYear: false
     },
     {
         en: 'Christmas Day',
@@ -93,7 +105,8 @@ let federalHolidayRules = [
         isFixedDate: true,
         tags: [ 'federal', 'religious', 'christianity' ],
         month: util.months.december,
-        day: 25
+        day: 25,
+        peekNextYear: false
     }
 ];
 
@@ -115,7 +128,7 @@ let otherHolidayRules = [
         day: 14
     },
     {
-        en: "Saint Patrick's Day",
+        en: "St. Patrick's Day",
         es: "Día de San Patricio",
         isFixedDate: true,
         tags: [ 'non-federal', 'religious', 'christianity' ],
@@ -224,6 +237,8 @@ let easterHolidayRules = [
 ];
 
 function getHolidayList(year, language) {
+    language = language || defaultLanguage;
+    
     return getFederalHolidays(year, language)
         .concat(getOtherHolidays(year, language))
         .concat(getEasterHolidays(year, language))
@@ -231,15 +246,9 @@ function getHolidayList(year, language) {
 }
 
 function getFederalHolidays(year, language) {
-    let holidays = federalHolidayRules.map(r => ({
-            name: r[language],
-            tags: r.tags,
-            natural: true,
-            date: r.isFixedDate
-                ? new Date(year, r.month, r.day)
-                : util.getNthDayOfNthWeek(new Date(year, r.month, 1), r.dayOfWeek, r.weekNumber)
-        })
-    );
+    let holidays = federalHolidayRules
+        .map(rule => createHolidayFromRule(year, language, rule))
+        .concat(getPeekHolidays(year, language));
 
     let holidaysObservedOnAnotherDay = holidays
         .filter(h => util.weekendDays.includes(h.date.getDay()))
@@ -251,7 +260,7 @@ function getFederalHolidays(year, language) {
             })
         );
 
-    return holidays.concat(holidaysObservedOnAnotherDay);
+    return holidays.concat(holidaysObservedOnAnotherDay).filter(h => h.date.getFullYear() == year);
 }
 
 function getOtherHolidays(year, language) {
@@ -274,6 +283,24 @@ function getEasterHolidays(year, language) {
             date: util.addDays(easter, -r.daysBeforeEaster)
         })
     );
+}
+
+function createHolidayFromRule(year, language, rule) {
+    return {
+        name: rule[language],
+        tags: rule.tags,
+        natural: true,
+        date: rule.isFixedDate
+            ? new Date(year, rule.month, rule.day)
+            : util.getNthDayOfNthWeek(new Date(year, rule.month, 1), rule.dayOfWeek, rule.weekNumber)
+    }
+}
+
+function getPeekHolidays(year, language)  {
+    return federalHolidayRules
+        .filter(rule => rule.peekNextYear)
+        .map(rule => createHolidayFromRule(year + 1, language, rule));
+
 }
 
 function getObservedText(language) {

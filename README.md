@@ -104,7 +104,7 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2021 [zachnology](https://github.com/zachnology).
+Copyright © 2021 [Zack Gomez](https://github.com/zachnology).
 
 This project is [MIT](https://github.com/zachnology/holidate/blob/master/LICENSE) licensed.
 
